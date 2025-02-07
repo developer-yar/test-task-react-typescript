@@ -1,0 +1,15 @@
+@use "@assets/styles/mixins/breakpoints";
+
+.field {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+
+  @include breakpoints.for(desktop) {
+    min-block-size: 104px;
+  }
+
+  @include breakpoints.for(phone) {
+    min-block-size: 79.3px;
+  }
+}

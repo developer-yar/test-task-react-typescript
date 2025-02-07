@@ -1,0 +1,34 @@
+@use "reset";
+@use "variables";
+@use "mixins/breakpoints";
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
+html {
+  min-inline-size: 320px;
+  scroll-behavior: smooth;
+  font-family: Manrope, serif;
+
+  @include breakpoints.for(desktop) {
+    font-size: 16px;
+  }
+
+  @include breakpoints.for(tablet) {
+    font-size: 14px;
+  }
+
+  @include breakpoints.for(phone) {
+    font-size: 12px;
+  }
+}
+
+body {
+  max-inline-size: 1200px;
+  padding: 32px 16px;
+  margin: auto;
+
+  & > div {
+    display: grid;
+    gap: 16px;
+  }
+}
