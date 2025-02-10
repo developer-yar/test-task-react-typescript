@@ -1,0 +1,14 @@
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+  gap: 16px 32px;
+
+  & > * {
+    &:last-child {
+      grid-column: 1/-1;
+      max-inline-size: 320px;
+      inline-size: 100%;
+      justify-self: end;
+    }
+  }
+}
