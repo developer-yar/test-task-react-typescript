@@ -1,9 +1,16 @@
+import { FC } from "react";
+import { FormKeys } from "@models/FormKeys";
 import * as styles from "./form-label.module.scss";
 
 interface FormLabelProps {
   labelText: string;
+  htmlFor: FormKeys;
 }
 
-export const FormLabel: React.FC<FormLabelProps> = ({ labelText }) => {
-  return <label className={styles.label}>{labelText}</label>;
+export const FormLabel: FC<FormLabelProps> = ({ labelText, htmlFor }) => {
+  return (
+    <label className={styles.label} htmlFor={htmlFor}>
+      {labelText}
+    </label>
+  );
 };

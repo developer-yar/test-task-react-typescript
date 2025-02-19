@@ -1,3 +1,4 @@
+import { FC, memo } from "react";
 import * as Yup from "yup";
 import { Form, Formik, FormikErrors, FormikTouched } from "formik";
 import { FormButton } from "@components/form-button/form-button";
@@ -28,7 +29,7 @@ const validationSchema = Yup.object({
     .email("Некорректный формат email"),
 });
 
-export const FormComponent: React.FC = () => {
+export const FormComponent: FC = () => {
   const handleSubmit = (values: IFormData): void => {
     const message = `Имя: ${values.name}\nВозраст: ${values.age}\nEmail: ${values.email}`;
     setTimeout(() => alert(message), 200);
@@ -48,17 +49,20 @@ export const FormComponent: React.FC = () => {
             <FieldWrapper
               name="name"
               label="Имя"
-              validation={{ errors, touched }}
+              errors={errors}
+              touched={touched}
             />
             <FieldWrapper
               name="age"
               label="Возраст"
-              validation={{ errors, touched }}
+              errors={errors}
+              touched={touched}
             />
             <FieldWrapper
               name="email"
               label="Email"
-              validation={{ errors, touched }}
+              errors={errors}
+              touched={touched}
             />
             <FormButton buttonText="Проверить данные" />
           </Form>
@@ -69,21 +73,19 @@ export const FormComponent: React.FC = () => {
   );
 };
 
-const FieldWrapper: React.FC<{
+const FieldWrapper: FC<{
   name: FormKeys;
   label: string;
-  validation: {
-    errors: FormikErrors<IFormData>;
-    touched: FormikTouched<IFormData>;
-  };
-}> = ({ name, label, validation: { errors, touched } }) => {
+  errors: FormikErrors<IFormData>;
+  touched: FormikTouched<IFormData>;
+}> = memo(({ name, label, errors, touched }) => {
   const hasError: boolean = !!(touched[name] && errors[name]);
 
   return (
     <FormField>
-      <FormLabel labelText={label} />
+      <FormLabel labelText={label} htmlFor={name} />
       <FormInput name={name} isInvalid={hasError} />
       <FormError name={name} />
     </FormField>
   );
-};
+});
